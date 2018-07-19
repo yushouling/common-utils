@@ -2,10 +2,10 @@ package com.ysl.utils;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.*;
@@ -31,19 +31,8 @@ public final class GsonUtil {
         return gsonDefault.toJson(obj);
     }
 
-    public static final String EMPTY = "";
-
-    public static final String EMPTY_JSON = "{}";
-
-    public static final String EMPTY_JSON_ARRAY = "[]";
-
-    public static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
-
-    public static final Double SINCE_VERSION_12 = 1.2d;
-
     static {
         if (gson == null) {
-            // gson = new Gson();
             gson = new GsonBuilder().serializeNulls().create();
         }
         if (gson2 == null) {
@@ -56,25 +45,17 @@ public final class GsonUtil {
     private GsonUtil() {
     }
 
-    public static boolean isEmpty(String inStr) {
-        boolean reTag = false;
-        if (inStr == null || "".equals(inStr)) {
-            reTag = true;
-        }
-        return reTag;
-    }
 
     /**
-     * 判断字符串是否包含英文
+     * 判断字符串是否包含中文
      *
      * @param str
      * @return
      */
     public static boolean isContainChinese(String str) {
-
         Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
         Matcher m = p.matcher(str);
-        return !m.find();
+        return m.find();
 
     }
 
@@ -118,23 +99,6 @@ public final class GsonUtil {
             rulsObj = rulsMap.get(key);
         }
         return rulsObj;
-    }
-
-
-    public static boolean isClassNull(Object obj) {
-        boolean state = true;
-        try {
-            for (Field f : obj.getClass().getDeclaredFields()) {
-                f.setAccessible(true);
-                if (f.get(obj) == null || "".equals(f.get(obj))) {
-                } else {
-                    state = false;
-                }
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return state;
     }
 
     /**
@@ -288,7 +252,7 @@ public final class GsonUtil {
      * @return
      */
     public static String toJson(Object obj, final String dateformat) {
-        if (obj == null || isBlank(dateformat)) {
+        if (obj == null || StringUtils.isBlank(dateformat)) {
             return toJson(obj);
         }
         Gson builder = new GsonBuilder().registerTypeHierarchyAdapter(Date.class, new JsonSerializer<Date>() {
@@ -354,22 +318,5 @@ public final class GsonUtil {
         }).create();
         return builder.toJson(obj);
     }
-
-    private static boolean isBlank(CharSequence cs) {
-        int strLen;
-        if (cs == null || (strLen = cs.length()) == 0) {
-            return true;
-        }
-        for (int i = 0; i < strLen; i++) {
-            if (!Character.isWhitespace(cs.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static final String DATE = "yyyy-MM-dd";
-    public static final String DATEMIN = "yyyy-MM-dd HH:mm";
-    public static final String DATETIME = "yyyy-MM-dd HH:mm:ss";
 
 }
