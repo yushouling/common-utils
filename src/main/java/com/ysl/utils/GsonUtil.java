@@ -9,8 +9,6 @@ import org.joda.time.format.DateTimeFormatter;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * JSON转换工具类
@@ -43,20 +41,6 @@ public final class GsonUtil {
     }
 
     private GsonUtil() {
-    }
-
-
-    /**
-     * 判断字符串是否包含中文
-     *
-     * @param str
-     * @return
-     */
-    public static boolean isContainChinese(String str) {
-        Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
-        Matcher m = p.matcher(str);
-        return m.find();
-
     }
 
     /**
