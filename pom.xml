@@ -141,21 +141,6 @@
 			<url>http://127.0.0.1:8081/nexus/content/groups/public</url>
 		</pluginRepository>
 	</pluginRepositories> -->
-	
-	<repositories>
-		<repository>
-			<id>Nexus</id>
-			<name>Team Nexus Repository</name>
-			<url>http://192.168.74.121:8081/nexus/content/groups/public</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>Nexus</id>
-			<name>Team Nexus Repository</name>
-			<url>http://192.168.74.121:8081/nexus/content/groups/public</url>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<build>
 		<pluginManagement>
