@@ -8,6 +8,9 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.*;
 
 @SuppressWarnings("restriction")
 public class StringUtil {
@@ -159,5 +162,37 @@ public class StringUtil {
 
 		return ret;
 	}
+	
+    /**
+     * 参数map转成String
+     *
+     * @param params
+     * @param encode
+     * @return
+     */
+    public static String buildParams(Map<String, String> params, boolean encode) {
+        List<String> keys = new ArrayList<>(params.keySet());
+        Collections.sort(keys);
+        StringBuilder bud = new StringBuilder();
+        for (String key : keys) {
+            bud.append(key).append("=");
+            if (encode) {
+                bud.append(urlEncode(params.get(key)));
+            } else {
+                bud.append(params.get(key));
+            }
+            bud.append("&");
+        }
+        bud.setLength(bud.length() - 1);
+        return bud.toString();
+    }
+
+    public static String urlEncode(String s) {
+        try {
+            return URLEncoder.encode(s, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return s;
+        }
+    }
 
 }
