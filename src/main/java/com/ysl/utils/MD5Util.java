@@ -1,4 +1,4 @@
-package com.daoshu.landplanplatform.utils;
+package com.ysl.utils;
 
 import java.util.Random;
 
@@ -7,19 +7,10 @@ import org.apache.commons.codec.binary.Hex;
 import java.security.NoSuchAlgorithmException;
 import java.security.MessageDigest;
 
-/**
- * @Classname MD5Util
- * @Description TODO
- * @Date 2019/5/27 11:23
- * @Created by Jeremy
- */
 public class MD5Util {
 
   /**
    * 普通MD5
-   *
-   * @Date 2019/5/27 11:23
-   * @Created by Jeremy
    */
   public static String MD5(String input) {
     MessageDigest md5 = null;
@@ -54,8 +45,6 @@ public class MD5Util {
   /**
    * 加盐MD5
    *
-   * @Date 2019/5/27 11:23
-   * @Created by Jeremy
    */
   public static String generate(String password) {
     Random r = new Random();
@@ -82,8 +71,6 @@ public class MD5Util {
   /**
    * 校验加盐后是否和原文一致
    *
-   * @Date 2019/5/27 11:23
-   * @Created by Jeremy
    */
   public static boolean verify(String password, String md5) {
     char[] cs1 = new char[32];
